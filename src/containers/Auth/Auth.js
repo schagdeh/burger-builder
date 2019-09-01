@@ -50,13 +50,12 @@ class Auth extends Component {
     }
   }
 
-
-  inputChangedHandler = (event, controlName) => {
+  inputChangedHandler = (event, controlsName) => {
     event.preventDefault()
     const updatedControls = updateObject(this.state.controls, {
-      [controlName]: updateObject(this.state.controls, {
+      [controlsName]: updateObject(this.state.controls[controlsName], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
+        valid: checkValidity(event.target.value, this.state.controls[controlsName].validation),
         touched: true
       })
     })
@@ -76,23 +75,23 @@ class Auth extends Component {
 
   render () {
 
-    const formElementArray = []
+    const controlsElementArray = []
     for (let key in this.state.controls) {
-      formElementArray.push({
+      controlsElementArray.push({
         id: key,
         config: this.state.controls[key],
       })
     }
-    let form = formElementArray.map(formElement => (
+    let form = controlsElementArray.map(controlsElement => (
       <Input
-        key={formElement.id}
-        elementType={formElement.config.elementType}
-        elementConfig={formElement.config.elementConfig}
-        value={formElement.config.value}
-        invalid={!formElement.config.valid}
-        shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}
-        changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+        key={controlsElement.id}
+        elementType={controlsElement.config.elementType}
+        elementConfig={controlsElement.config.elementConfig}
+        value={controlsElement.config.value}
+        invalid={!controlsElement.config.valid}
+        shouldValidate={controlsElement.config.validation}
+        touched={controlsElement.config.touched}
+        changed={(event) => this.inputChangedHandler(event, controlsElement.id)}/>
     ))
 
     if (this.props.loading) {
