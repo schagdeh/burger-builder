@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
-import { updateObject } from '../utility'
+import { updateObject } from '../../shared/utility'
 
 const initialState = {
   token: null,
@@ -34,9 +34,6 @@ const setAuthRedirectPath = (state, action) => {
   return updateObject(state, {authRedirectPath: action.path})
 }
 
-const authCheckState = (state, action) => {
-  return updateObject(state, {})
-}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
