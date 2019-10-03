@@ -26,7 +26,7 @@ const App = props => {
 
   useEffect(() => {
     onTryAutoSignup()
-  }, [])
+  }, [onTryAutoSignup])
 
     let route = (
       <Switch>

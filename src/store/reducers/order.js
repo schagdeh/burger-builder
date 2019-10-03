@@ -4,7 +4,7 @@ import { updateObject } from '../../shared/utility'
 const initialState = {
   orders: [],
   loading: false,
-  purchased: false
+  purchased: false,
 }
 
 const purchaseInit = (state, action) => {
@@ -36,7 +36,18 @@ const fetchOrdersSuccess = (state, action) => {
 const fetchOrdersFail = (state, action) => {
   return updateObject(state, {loading: false})
 }
-
+const fetchDeleteOrdersStart = (state, action) => {
+  return updateObject(state, {loading: true})
+}
+const fetchDeleteOrdersSuccess = (state, action) => {
+  return updateObject(state, {
+    orders: state.orders.filter(order => order.id !== action.orderId),
+    loading: false
+  })
+}
+const fetchDeleteOrdersFail = (state, action) => {
+  return updateObject(state, {loading: false})
+}
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -54,6 +65,13 @@ const reducer = (state = initialState, action) => {
       return fetchOrdersSuccess(state, action)
     case actionTypes.FETCH_ORDERS_FAIL:
       return fetchOrdersFail(state, action)
+    case actionTypes.FETCH_DELETE_ORDERS_START:
+      return fetchDeleteOrdersStart(state, action)
+    case actionTypes.FETCH_DELETE_ORDERS_SUCCESS:
+      return fetchDeleteOrdersSuccess(state, action)
+    case actionTypes.FETCH_DELETE_ORDERS_FAIL:
+      return fetchDeleteOrdersFail(state, action)
+
     default:
       return state
   }

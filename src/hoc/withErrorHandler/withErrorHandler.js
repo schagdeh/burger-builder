@@ -17,10 +17,10 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     useEffect(() => {
       return () => {
-        axios.interceptors.request.eject(reqInterceptor)
+        axios.interceptors.request.eject(resInterceptor)
         axios.interceptors.response.eject(reqInterceptor)
       }
-    }, [reqInterceptor, reqInterceptor])
+    }, [resInterceptor, reqInterceptor])
 
     const errorConfirmedHandler = () => {
       setError(null)

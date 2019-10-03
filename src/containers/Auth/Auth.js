@@ -46,7 +46,7 @@ const Auth = props => {
     if (!props.buildingBurger && props.authRedirectPath !== '/') {
       props.onSetAuthRedirectPath()
     }
-  }, [])
+  }, [props])
 
   const inputChangedHandler = (event, controlsName) => {
     event.preventDefault()
